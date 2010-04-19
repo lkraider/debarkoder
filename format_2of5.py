@@ -114,9 +114,11 @@ def threshold(rle):
 def process(rle):
     """ Full I25 processing. Return None for invalid input. """
     if len(rle) < minimum_size: return None
+    result = []
     cutoff = threshold(rle)
     encoded = [(int(l > cutoff), c) for l,c in rle]
-    result = decode(deinterleave(encoded))
+    data = deinterleave(encoded)
+    if data: result = decode(data)
     return result or None
 
 if __name__ == '__main__':
